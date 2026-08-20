@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/icons/logo.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no" />
+    <!-- 主题色：浅色/深色双模式（华为 HarmonyOS 原生支持） -->
+    <meta name="theme-color" content="#f0f2f5" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0a0a0f" media="(prefers-color-scheme: dark)" />
+    <!-- 华为 EMUI / 鸿蒙 WebApp 全屏 -->
+    <meta name="huawei-web-app" content="fullscreen" />
+    <meta name="x5-fullscreen" content="true" />
+    <meta name="x5-page-mode" content="app" />
+    <!-- Oppo / 其他 Android 浏览器全屏 -->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="智能记账" />
+    <meta name="description" content="智能记账 —— 离线优先、云同步的智能记账应用，元答AI工作室出品。" />
+    <!-- 鸿蒙字体 HarmonyOS Sans SC（护肤 AI 同款）· 含 Thin/Regular/Medium/Bold 完整字重 -->
+    <link rel="preconnect" href="https://cdn.hmos.dongs.xyz" crossorigin />
+    <link rel="stylesheet" href="https://cdn.hmos.dongs.xyz/css/harmonyos_sans_sc.css" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="apple-touch-icon" href="/icons/logo.svg" />
+    <!-- Cloudflare Turnstile 人机验证（显式渲染模式，由组件按需调用） -->
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
+    <title>智能记账</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
