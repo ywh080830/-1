@@ -1,8 +1,8 @@
 import { createClient } from '@supabase/supabase-js';
 
 /**
- * 全局唯一的 Supabase 客户端实例。
- * 页面 / Store 禁止直接散写 supabase 调用，统一走 src/lib/api.ts。
+ * 全局唯一的后端客户端实例。
+ * 页面 / Store 禁止直接散写后端调用，统一走 src/lib/api.ts。
  */
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL ?? '';
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY ?? '';
