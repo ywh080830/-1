@@ -1,6 +1,6 @@
 /**
  * authStore · 会话/用户/资料（06-系统设计 §4.5）
- * JWT 由 supabase-js 管理；profile 本地缓存
+ * JWT 由认证 SDK 管理；profile 本地缓存
  */
 import { create } from 'zustand';
 import { supabase } from '@/lib/supabase';
