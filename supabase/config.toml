@@ -1,4 +1,4 @@
-# Supabase 项目配置：smart_bookkeeping（记账11 sticrfirfyegdbssdaqm）
+# 后端服务配置：smart_bookkeeping
 project_id = "smart-bookkeeping"
 
 [api]
@@ -21,7 +21,7 @@ pool_mode = "transaction"
 [auth]
 enabled = true
 site_url = "http://localhost:5173"
-additional_redirect_urls = ["https://yimei.cc.cd"]
+additional_redirect_urls = ["<your-domain>"]
 jwt_expiry = 3600
 enable_signup = true
 
