@@ -163,7 +163,7 @@ CREATE POLICY ttag_write ON public.transaction_tags
     EXISTS (SELECT 1 FROM public.transactions t
             WHERE t.id = transaction_tags.transaction_id AND public.can_write_ledger(t.ledger_id)));
 
--- merchants：公共库只读；个人库本人可写；公共库写仅 service_role（Edge）
+-- merchants：公共库只读；个人库本人可写；公共库写仅特权角色（云函数）
 DROP POLICY IF EXISTS merchants_write ON public.merchants;
 DROP POLICY IF EXISTS merchants_read ON public.merchants;
 DROP POLICY IF EXISTS merchants_personal_write ON public.merchants;
@@ -202,7 +202,7 @@ DROP POLICY IF EXISTS ocr_own ON public.ocr_jobs;
 CREATE POLICY ocr_own ON public.ocr_jobs
   FOR ALL USING (user_id = auth.uid()) WITH CHECK (user_id = auth.uid());
 
--- user_memberships：只读；写入仅 Edge membership-verify（SECURITY DEFINER / service_role）
+-- user_memberships：只读；写入仅云函数 membership-verify（SECURITY DEFINER / 特权角色）
 DROP POLICY IF EXISTS um_own_read ON public.user_memberships;
 CREATE POLICY um_own_read ON public.user_memberships
   FOR SELECT USING (user_id = auth.uid());
@@ -263,7 +263,7 @@ VALUES ('receipts','receipts',false), ('exports','exports',false), ('avatars','a
 ON CONFLICT (id) DO NOTHING;
 
 -- 对象路径约定：receipts/<user_id>/<file>；exports/<user_id>/<file>；avatars/<user_id>/<file>
--- 用户仅能读写自己目录（Edge Function 以 service_role 跨用户读 receipts 处理 OCR）
+-- 用户仅能读写自己目录（云函数以特权角色跨用户读 receipts 处理 OCR）
 DROP POLICY IF EXISTS receipts_own ON storage.objects;
 CREATE POLICY receipts_own ON storage.objects FOR ALL TO authenticated
   USING (bucket_id = 'receipts' AND (storage.foldername(name))[1] = auth.uid()::text)
