@@ -2,7 +2,7 @@
  * 统一 API 封装 · 06-系统设计 §7.3
  * - 所有后端调用走本模块：api.rpc / api.from / 业务方法
  * - 统一错误码映射 + 401 跳登录 + toast
- * - 页面/Store 禁止直接散写 supabase（lib/supabase.ts 仅导出 client）
+ * - 页面/Store 禁止直接散写后端客户端（lib/supabase.ts 仅导出 client）
  */
 import { supabase } from './supabase';
 import { ErrorCode } from '@/types/api';
@@ -88,7 +88,7 @@ export function toApiError(error: unknown, fallback = '网络异常，请检查�
 
 /** 统一错误处理：toast + 401 跳登录
  *  @param silent 后台数据加载失败时不弹 toast（避免后端不可用时反复弹窗）
- *  体验模式（isDemo）：无真实 Supabase 会话，所有后端请求 401 属正常现象，
+ *  体验模式（isDemo）：无真实后端会话，所有后端请求 401 属正常现象，
  *  一律静默抛出，交由各层离线兜底，绝不弹窗、绝不强制跳登录，保证无缝使用。
  */
 export function handleApiError(error: unknown, fallback?: string, silent = false): never {
@@ -101,7 +101,7 @@ export function handleApiError(error: unknown, fallback?: string, silent = false
   // 1) 后台静默加载（silent，如切到「统计」页拉取 summary/trend/calendar）失败 →
   //    不清会话、不跳登录，直接抛出交由页面 catch 兜底展示空态。
   //    否则会在浏览过程中被「闪回」到登录页（本 bug 的根因）。
-  //    真正的会话失效由 supabase onAuthStateChange 统一处理（置 user=null → Protected 跳登录）。
+  //    真正的会话失效由后端会话状态监听统一处理（置 user=null → Protected 跳登录）。
   // 2) 显式操作（非 silent，如保存/删除）失败 → 会话可能已失效，清理会话即可；
   //    不再用 window.location.href 硬刷新整页（那本身就是一次「跳登录」观感），
   //    改由 Protected 守卫在复核真实会话后统一、平滑地处理跳转。
