@@ -1,5 +1,5 @@
 /**
- * Supabase Database 行类型（与迁移 0003–0006 手工对齐，snake_case）。
+ * 后端数据库行类型（与迁移 0003–0006 手工对齐，snake_case）。
  * 唯一类型来源：src/types/；禁止在组件内内联类型。
  * 金额列：numeric 经 PostgREST 序列化为 number，展示经 lib/money.ts 转 string。
  */
