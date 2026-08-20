@@ -1,0 +1,247 @@
+/* ============================================================
+   Design Tokens · Aurora Silk（全新设计语言）
+   6 槽配色 + 语义色 / 字体刻度 / 间距 / 圆角 / 动效 / 阴影 / z-index
+   浅色为默认，深色用 [data-theme="dark"] 覆盖
+   字体：HarmonyOS Sans SC（护肤 AI 同款）
+   ============================================================ */
+:root {
+  /* ---------- 配色（6 槽 + 语义色） ---------- */
+  /* 主色：虹膜紫（Iris Violet）—— 高级、可信、现代 */
+  --color-primary: #7c5cfc;
+  --color-primary-rgb: 124 92 252;
+  --color-primary-deep: #5b3fe0;
+  --color-primary-deep-rgb: 91 63 224;
+  --color-primary-hover: #6a49f0;
+  --color-primary-pressed: #4b35c4;
+  --color-primary-50: #f1eeff;
+  --color-primary-100: #e7e1ff;
+  --color-primary-200: #d6ccff;
+  --color-primary-300: #bca9ff;
+  --color-primary-400: #9f82fb;
+  --color-primary-500: #7c5cfc;
+  --color-primary-600: #6a49f0;
+  --color-primary-700: #5b3fe0;
+  --color-primary-800: #4b35c4;
+  --color-primary-900: #2e1f80;
+
+  /* 辅助色：青碧（Teal） */
+  --color-secondary: #11b5a8;
+  --color-secondary-rgb: 17 181 168;
+  --color-secondary-deep: #2bd0c2;
+  --color-secondary-deep-rgb: 43 208 194;
+  --color-secondary-hover: #0e9a8f;
+
+  /* 强调色：暖珊瑚（用于特殊高亮/徽标） */
+  --color-cta: #ff8a5b;
+  --color-cta-rgb: 255 138 91;
+  --color-cta-deep: #ffa07a;
+  --color-cta-deep-rgb: 255 160 122;
+  --color-cta-hover: #f2723f;
+
+  /* 背景 / 表面：暖中性、低饱和，更柔更"App" */
+  --color-bg: #f5f6fb;
+  --color-bg-rgb: 245 246 251;
+  --color-surface: #ffffff;
+  --color-surface-rgb: 255 255 255;
+  --color-surface-2: #f1f2f8;
+  --color-surface-2-rgb: 241 242 248;
+
+  /* 文字 */
+  --color-text: #14161f;
+  --color-text-rgb: 20 22 31;
+  --color-text-secondary: #5a6072;
+  --color-text-secondary-rgb: 90 96 114;
+
+  /* 边框 */
+  --color-border: rgb(20 22 31 / 0.10);
+  --color-border-rgb: 224 227 237;
+  --color-border-strong: rgb(170 175 195);
+
+  --color-muted: #9aa0b0;
+  --color-muted-rgb: 154 160 176;
+
+  /* 收支语义色（财务惯例：收入绿 / 支出玫红） */
+  --color-income: #13c08c;
+  --color-income-rgb: 19 192 140;
+  --color-income-deep: #3ad9a8;
+  --color-income-deep-rgb: 58 217 168;
+
+  --color-expense: #f5455c;
+  --color-expense-rgb: 245 69 92;
+  --color-expense-deep: #ff7a8c;
+  --color-expense-deep-rgb: 255 122 140;
+
+  --color-success: #13c08c;
+  --color-success-rgb: 19 192 140;
+  --color-error: #f5455c;
+  --color-error-rgb: 245 69 92;
+  --color-warning: #f5a524;
+  --color-warning-rgb: 245 165 36;
+
+  --color-disabled: rgb(154 160 176 / 0.4);
+
+  /* ---------- 字体刻度（HarmonyOS Sans SC 优先 + OPPO Sans 兜底） ---------- */
+  --font-display: 'HarmonyOS Sans SC', 'OPPO Sans', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif;
+  --font-body: 'HarmonyOS Sans SC', 'OPPO Sans', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif;
+
+  --text-display: 34px;
+  --text-display-lh: 1.15;
+  --text-display-w: 800;
+  --text-h1: 24px;
+  --text-h1-lh: 1.3;
+  --text-h1-w: 700;
+  --text-h2: 20px;
+  --text-h2-lh: 1.3;
+  --text-h2-w: 700;
+  --text-h3: 17px;
+  --text-h3-lh: 1.4;
+  --text-h3-w: 600;
+  --text-body: 14px;
+  --text-body-lh: 1.6;
+  --text-body-w: 400;
+  --text-caption: 12px;
+  --text-caption-lh: 1.5;
+  --text-caption-w: 400;
+  --text-overline: 11px;
+  --text-overline-lh: 1.5;
+  --text-overline-w: 600;
+
+  /* ---------- 间距（8px 基准） / 圆角（更大更柔） ---------- */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 22px;
+  --radius-xl: 30px;
+  --radius-full: 9999px;
+
+  /* ---------- 微交互 ---------- */
+  --duration-fast: 0.14s;
+  --duration-base: 0.22s;
+  --duration-slow: 0.34s;
+  --ease-standard: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* ---------- 阴影 / 层级（分层、柔、带主色微染） ---------- */
+  --shadow-card: 0 1px 2px rgb(20 22 31 / 0.05), 0 4px 14px rgb(20 22 31 / 0.05);
+  --shadow-pop: 0 12px 32px rgb(20 22 31 / 0.14), 0 4px 10px rgb(20 22 31 / 0.08);
+  --shadow-fab: 0 8px 24px rgb(124 92 252 / 0.40), 0 2px 6px rgb(124 92 252 / 0.25);
+  --shadow-glass: 0 8px 32px rgb(20 22 31 / 0.06);
+  --shadow-glass-lg: 0 16px 48px rgb(20 22 31 / 0.10);
+
+  --z-base: 0;
+  --z-sticky: 100;
+  --z-fab: 200;
+  --z-modal: 300;
+  --z-toast: 400;
+
+  /* ---------- 触控目标 ---------- */
+  --touch-target: 44px;
+
+  /* ---------- 布局尺寸 ---------- */
+  --sidebar-width: 232px;
+  --bottom-tab-height: 64px;
+  --page-max-width: 760px;
+
+  /* ---------- App 设备外框（app 端样式） ---------- */
+  --app-frame-max: 430px;
+  --app-frame-radius: 46px;
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+
+  /* ---------- Glassmorphism 变量（更轻透） ---------- */
+  --glass-bg: rgb(255 255 255 / 0.72);
+  --glass-border: rgb(255 255 255 / 0.55);
+  --glass-shadow: 0 8px 32px rgb(20 22 31 / 0.06);
+  --glass-blur: 14px;
+}
+
+/* ============================================================
+   深色模式
+   ============================================================ */
+[data-theme='dark'] {
+  --color-primary: #8b72ff;
+  --color-primary-rgb: 139 114 255;
+  --color-primary-deep: #a98bff;
+  --color-primary-deep-rgb: 169 139 255;
+  --color-primary-hover: #9b82ff;
+  --color-primary-pressed: #b6a0ff;
+  --color-primary-50: #1a1633;
+  --color-primary-100: #221c44;
+  --color-primary-200: #2c2455;
+  --color-primary-300: #3a2f72;
+  --color-primary-400: #4f3f9e;
+  --color-primary-500: #8b72ff;
+  --color-primary-600: #9b82ff;
+  --color-primary-700: #a98bff;
+  --color-primary-800: #c3b1ff;
+  --color-primary-900: #e7e2ff;
+
+  --color-secondary: #2bd0c2;
+  --color-secondary-rgb: 43 208 194;
+  --color-secondary-deep: #54e0d3;
+  --color-secondary-deep-rgb: 84 224 211;
+  --color-secondary-hover: #11b5a8;
+
+  --color-cta: #ffa07a;
+  --color-cta-rgb: 255 160 122;
+  --color-cta-deep: #ffb499;
+  --color-cta-deep-rgb: 255 180 153;
+  --color-cta-hover: #ff8a5b;
+
+  --color-bg: #0b0b14;
+  --color-bg-rgb: 11 11 20;
+  --color-surface: #16161f;
+  --color-surface-rgb: 22 22 31;
+  --color-surface-2: #1e1e2a;
+  --color-surface-2-rgb: 30 30 42;
+
+  --color-text: #eceef4;
+  --color-text-rgb: 236 238 244;
+  --color-text-secondary: #9aa0b4;
+  --color-text-secondary-rgb: 154 160 180;
+
+  --color-border: rgb(255 255 255 / 0.10);
+  --color-border-rgb: 51 54 70;
+  --color-border-strong: rgb(90 94 112);
+
+  --color-muted: #6b7186;
+  --color-muted-rgb: 107 113 134;
+
+  --color-income: #3ad9a8;
+  --color-income-rgb: 58 217 168;
+  --color-income-deep: #5fe3b8;
+  --color-income-deep-rgb: 95 227 184;
+
+  --color-expense: #ff7a8c;
+  --color-expense-rgb: 255 122 140;
+  --color-expense-deep: #ffa0ae;
+  --color-expense-deep-rgb: 255 160 174;
+
+  --color-success: #3ad9a8;
+  --color-success-rgb: 58 217 168;
+  --color-error: #ff7a8c;
+  --color-error-rgb: 255 122 140;
+  --color-warning: #ffc24d;
+  --color-warning-rgb: 255 194 77;
+
+  --color-disabled: rgb(107 113 134 / 0.4);
+
+  --shadow-card: 0 1px 2px rgb(0 0 0 / 0.30), 0 4px 14px rgb(0 0 0 / 0.22);
+  --shadow-pop: 0 12px 32px rgb(0 0 0 / 0.45), 0 4px 10px rgb(0 0 0 / 0.25);
+  --shadow-fab: 0 8px 24px rgb(139 114 255 / 0.40), 0 2px 6px rgb(139 114 255 / 0.25);
+  --shadow-glass: 0 8px 32px rgb(0 0 0 / 0.35);
+  --shadow-glass-lg: 0 16px 48px rgb(0 0 0 / 0.45);
+
+  --glass-bg: rgb(22 22 31 / 0.72);
+  --glass-border: rgb(255 255 255 / 0.10);
+  --glass-shadow: 0 8px 32px rgb(0 0 0 / 0.35);
+}
