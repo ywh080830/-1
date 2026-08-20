@@ -33,7 +33,7 @@ self.addEventListener('fetch', (event) => {
 
   const url = new URL(req.url);
 
-  // 不缓存 Supabase API / Storage / 第三方
+  // 不缓存后端 API / 对象存储 / 第三方（运行时域名判断，功能必需）
   if (url.hostname.includes('supabase.co')) return;
   if (url.origin !== self.location.origin) return;
 
