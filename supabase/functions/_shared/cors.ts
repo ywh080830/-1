@@ -33,7 +33,7 @@ export function clientWithToken(token: string): SupabaseClient {
   });
 }
 
-/** service_role 客户端（绕过 RLS，仅服务端内部使用） */
+/** 服务端特权客户端（绕过行级安全策略，仅服务端内部使用） */
 export function serviceClient(): SupabaseClient {
   const url = Deno.env.get('SUPABASE_URL') ?? '';
   const serviceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? '';
