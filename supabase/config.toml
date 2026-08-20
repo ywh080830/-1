@@ -1,0 +1,44 @@
+# Supabase 项目配置：smart_bookkeeping（记账11 sticrfirfyegdbssdaqm）
+project_id = "smart-bookkeeping"
+
+[api]
+enabled = true
+port = 54321
+schemas = ["public", "graphql_public"]
+extra_search_path = ["public", "extensions"]
+max_rows = 1000
+
+[db]
+port = 54322
+shadow_port = 54320
+major_version = 17
+
+[db.pooler]
+enabled = true
+port = 54329
+pool_mode = "transaction"
+
+[auth]
+enabled = true
+site_url = "http://localhost:5173"
+additional_redirect_urls = ["https://yimei.cc.cd"]
+jwt_expiry = 3600
+enable_signup = true
+
+[storage]
+enabled = true
+file_size_limit = "52428800"
+
+[realtime]
+enabled = true
+
+[analytics]
+enabled = false
+
+[functions]
+enabled = true
+verify_jwt = true
+
+# turnstile-verify：登录前调用，无 JWT，必须关闭 verify_jwt
+[functions.turnstile-verify]
+verify_jwt = false
