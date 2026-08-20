@@ -3,7 +3,7 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "description": "智能记账 · Web PWA（React 18 + TS + Vite + Supabase）· 元答AI工作室",
+  "description": "智能记账 · Web PWA（React 18 + TS + Vite）· 元答AI工作室",
   "scripts": {
     "dev": "vite",
     "build": "tsc --noEmit -p tsconfig.json && vite build",
