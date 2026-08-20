@@ -1,37 +1,45 @@
-# 部署与域名（yimei.cc.cd）
+# 部署指南
 
-> **当前实际方案：方案 B Cloudflare Pages（国内代理）**
-> 架构：数据存储于 Supabase（用户不可见）；前端服务部署于 Cloudflare Pages，
-> 绑定自定义域名 `yimei.cc.cd`，国内访问经 Cloudflare 代理分发。
-> 用户访问入口仅为自有域名，隐私政策不披露 Supabase 存储地址（详见 deliverables/敏感信息排查报告.md）。
+> 前端为纯静态构建产物（PWA），可部署到任意支持 SPA 回退与 HTTPS 的静态托管；
+> 云函数与数据库随后端服务平台发布，用户侧不感知具体存储位置。
 
-## 方案 B：Cloudflare Pages（当前使用，推荐）
-
-1. 构建命令 `npm run build`，输出目录 `dist`
-2. SPA 回退：`public/_redirects` 已配置（内容 `/* /index.html 200`，随构建自动进入 dist）
-3. 自定义域绑定 `yimei.cc.cd`
-4. 平台侧配置环境变量：`VITE_SUPABASE_URL`、`VITE_SUPABASE_ANON_KEY`、`VITE_APP_URL`、`VITE_OCR_LIMIT`（勿上传 .env）
-
-## 方案 A：Vercel（备选，已含 vercel.json）
+## 1. 构建前端
 
 ```bash
 npm install
-npm run build          # 输出 dist/
-vercel --prod          # 或 GitHub 集成自动部署
+npm run build        # 输出 dist/（含 Service Worker + manifest + SPA 回退配置）
+npm run preview      # 本地预览构建产物
 ```
 
-- SPA 回退：`vercel.json` 已配置 `rewrites → /index.html`
-- 缓存：`/icons/*` 一年不可变缓存；`manifest.webmanifest` 正确 Content-Type
+## 2. 静态托管部署
 
-## 域名 CNAME 说明（yimei.cc.cd）
+- 上传 `dist/` 至目标托管平台（支持 SPA 回退：所有路径回退到 `/index.html`，构建产物已内置）
+- 平台侧配置环境变量（构建期注入，勿上传 `.env`）：
 
-| 记录 | 类型 | 名称 | 值 |
-|---|---|---|---|
-| 根域 | CNAME | `yimei.cc.cd` | Cloudflare Pages 分配的域名（pages.dev） |
-| www | CNAME | `www` | 同上 |
+| 变量 | 说明 |
+|---|---|
+| `VITE_SUPABASE_URL` | 后端服务地址 |
+| `VITE_SUPABASE_ANON_KEY` | 公开匿名密钥 |
+| `VITE_APP_URL` | 应用访问域名（认证回调跳转用） |
+| `VITE_OCR_LIMIT` | 单日 OCR 次数上限 |
+| `VITE_TURNSTILE_SITE_KEY` | 人机验证 Site Key（可选，留空降级为未启用） |
 
-- 在域名注册商处将 `yimei.cc.cd` 添加 CNAME 指向 Cloudflare Pages；
-- Cloudflare 侧绑定自定义域后自动签发 HTTPS 证书；
-- Supabase API 请求由前端客户端直连 Supabase 默认域名（anon key + RLS 保护），
-  普通用户仅感知 `yimei.cc.cd`，不会在界面/文档中暴露 Supabase 存储地址；
-  如需完全同域，可将 `api.yimei.cc.cd` 自定义域名绑定至 Supabase（S2 可选优化）。
+## 3. 自定义域名
+
+- 在域名注册商处将应用域名 CNAME 解析至托管平台分配地址；
+- 托管平台侧绑定自定义域名后自动签发 HTTPS 证书；
+- 用户仅感知自有域名，界面与文档不披露后端存储地址。
+
+## 4. 云函数与数据库
+
+- 随后端服务平台发布（数据库迁移 / 云函数 / 运行时密钥均在平台侧管理）；
+- 运行时密钥通过平台 secrets 配置，勿写入前端代码或提交仓库。
+
+## 5. 验证清单
+
+| # | 检查项 | 预期 |
+|---|---|---|
+| 1 | 打开应用域名 | 正常加载 PWA，可安装 |
+| 2 | 注册 / 登录 | 人机验证通过后正常进入 |
+| 3 | 记账 / 拍照识别 | 数据落库并可跨端同步 |
+| 4 | 离线刷新 | Service Worker 生效，离线可打开 |
