@@ -28,10 +28,10 @@ async function run(req: Request): Promise<Response> {
   const start = body.start ?? '1900-01-01';
   const end = body.end ?? '2099-12-31';
 
-  // service_role 查询（RLS 不适用 RPC stats，直接查业务表）
+  // 特权角色查询（行级安全不适用 RPC 统计，直接查业务表）
   const service = serviceClient();
 
-  // 校验成员身份（service_role 绕过 RLS，需手动检查）
+  // 校验成员身份（特权角色绕过行级安全，需手动检查）
   const { data: ledger } = await service
     .from('ledgers')
     .select('id, name')
